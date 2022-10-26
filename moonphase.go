@@ -469,8 +469,8 @@ func (m *Moon) DegreesInSignTropical() float64 {
 		//"pisces"
 		return longitude - 330.0
 	default:
-		//"aries"
-		return longitude - 348.58
+		//"redundant for tropical"
+		return longitude
 	}
 
 }
