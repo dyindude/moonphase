@@ -490,47 +490,7 @@ func (m *Moon) DegreesInSignTropical() float64 {
 
 }
 
-func (m *Moon) DegreesInSignSidereal() float64 {
-	switch longitude := m.Longitude(); {
-	case longitude < 30.0:
-		//"aries"
-		return longitude + (360.0 - signToSiderealDegrees["pisces"])
-	case longitude < signToSiderealDegrees["taurus"]:
-		//"taurus"
-		return longitude - signToSiderealDegrees["aries"]
-	case longitude < signToSiderealDegrees["gemini"]:
-		//"gemini"
-		return longitude - signToSiderealDegrees["taurus"]
-	case longitude < signToSiderealDegrees["cancer"]:
-		//"cancer"
-		return longitude - signToSiderealDegrees["gemini"]
-	case longitude < signToSiderealDegrees["leo"]:
-		//"leo"
-		return longitude - signToSiderealDegrees["cancer"]
-	case longitude < signToSiderealDegrees["virgo"]:
-		//"virgo"
-		return longitude - signToSiderealDegrees["leo"]
-	case longitude < signToSiderealDegrees["libra"]:
-		//"libra"
-		return longitude - signToSiderealDegrees["virgo"]
-	case longitude < signToSiderealDegrees["scorpio"]:
-		//"scorpio"
-		return longitude - signToSiderealDegrees["libra"]
-	case longitude < signToSiderealDegrees["sagittarius"]:
-		//"sagittarius"
-		return longitude - signToSiderealDegrees["scorpio"]
-	case longitude < signToSiderealDegrees["capricorn"]:
-		//"capricorn"
-		return longitude - signToSiderealDegrees["sagittarius"]
-	case longitude < signToSiderealDegrees["aquarius"]:
-		//"aquarius"
-		return longitude - signToSiderealDegrees["capricorn"]
-	case longitude < signToSiderealDegrees["pisces"]:
-		//"pisces"
-		return longitude - signToSiderealDegrees["aquarius"]
-	default:
-		//"aries"
-		return 360.0 - longitude
-	}
-
+func (m *Moon) DegreesInSignSiderial() float64 {
+	m.longitude = m.longitude - 24
+	return m.DegreesInSignTropical()
 }
