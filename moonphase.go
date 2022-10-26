@@ -430,7 +430,7 @@ func (m *Moon) ZodiacSign() string {
 	return m.ZodiacSignTropical()
 }
 
-func DegreesInSignTropical(m *Moon) float64 {
+func (m *Moon) DegreesInSignTropical() float64 {
 	switch longitude := m.Longitude(); {
 	case longitude < 30.0:
 		//"aries"
