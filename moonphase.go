@@ -363,30 +363,45 @@ func (m *Moon) Longitude() float64 {
 	return m.longitude
 }
 
+var signToSiderealDegrees = map[string]float64{
+	"aries":       33.18,
+	"taurus":      51.16,
+	"gemini":      93.44,
+	"cancer":      119.48,
+	"leo":         135.30,
+	"virgo":       173.34,
+	"libra":       224.17,
+	"scorpio":     242.57,
+	"sagittarius": 271.26,
+	"capricorn":   302.49,
+	"aquarius":    311.72,
+	"pisces":      348.58,
+}
+
 func (m *Moon) ZodiacSignSidereal() string {
-	if m.longitude < 33.18 {
+	if m.longitude < signToSiderealDegrees["aries"] {
 		return "aries"
-	} else if m.longitude < 51.16 {
+	} else if m.longitude < signToSiderealDegrees["taurus"] {
 		return "taurus"
-	} else if m.longitude < 93.44 {
+	} else if m.longitude < signToSiderealDegrees["gemini"] {
 		return "gemini"
-	} else if m.longitude < 119.48 {
+	} else if m.longitude < signToSiderealDegrees["cancer"] {
 		return "cancer"
-	} else if m.longitude < 135.30 {
+	} else if m.longitude < signToSiderealDegrees["leo"] {
 		return "leo"
-	} else if m.longitude < 173.34 {
+	} else if m.longitude < signToSiderealDegrees["virgo"] {
 		return "virgo"
-	} else if m.longitude < 224.17 {
+	} else if m.longitude < signToSiderealDegrees["libra"] {
 		return "libra"
-	} else if m.longitude < 242.57 {
+	} else if m.longitude < signToSiderealDegrees["scorpio"] {
 		return "scorpio"
-	} else if m.longitude < 271.26 {
+	} else if m.longitude < signToSiderealDegrees["sagittarius"] {
 		return "sagittarius"
-	} else if m.longitude < 302.49 {
+	} else if m.longitude < signToSiderealDegrees["capricorn"] {
 		return "capricorn"
-	} else if m.longitude < 311.72 {
+	} else if m.longitude < signToSiderealDegrees["aquarius"] {
 		return "aquarius"
-	} else if m.longitude < 348.58 {
+	} else if m.longitude < signToSiderealDegrees["pisces"] {
 		return "pisces"
 	} else {
 		return "aries"
@@ -471,6 +486,51 @@ func (m *Moon) DegreesInSignTropical() float64 {
 	default:
 		//"redundant for tropical"
 		return longitude
+	}
+
+}
+
+func (m *Moon) DegreesInSignSidereal() float64 {
+	switch longitude := m.Longitude(); {
+	case longitude < 30.0:
+		//"aries"
+		return longitude + (360.0 - signToSiderealDegrees["pisces"])
+	case longitude < signToSiderealDegrees["taurus"]:
+		//"taurus"
+		return longitude - signToSiderealDegrees["aries"]
+	case longitude < signToSiderealDegrees["gemini"]:
+		//"gemini"
+		return longitude - signToSiderealDegrees["taurus"]
+	case longitude < signToSiderealDegrees["cancer"]:
+		//"cancer"
+		return longitude - signToSiderealDegrees["gemini"]
+	case longitude < signToSiderealDegrees["leo"]:
+		//"leo"
+		return longitude - signToSiderealDegrees["cancer"]
+	case longitude < signToSiderealDegrees["virgo"]:
+		//"virgo"
+		return longitude - signToSiderealDegrees["leo"]
+	case longitude < signToSiderealDegrees["libra"]:
+		//"libra"
+		return longitude - signToSiderealDegrees["virgo"]
+	case longitude < signToSiderealDegrees["scorpio"]:
+		//"scorpio"
+		return longitude - signToSiderealDegrees["libra"]
+	case longitude < signToSiderealDegrees["sagittarius"]:
+		//"sagittarius"
+		return longitude - signToSiderealDegrees["scorpio"]
+	case longitude < signToSiderealDegrees["capricorn"]:
+		//"capricorn"
+		return longitude - signToSiderealDegrees["sagittarius"]
+	case longitude < signToSiderealDegrees["aquarius"]:
+		//"aquarius"
+		return longitude - signToSiderealDegrees["capricorn"]
+	case longitude < signToSiderealDegrees["pisces"]:
+		//"pisces"
+		return longitude - signToSiderealDegrees["aquarius"]
+	default:
+		//"aries"
+		return 360.0 - longitude
 	}
 
 }
