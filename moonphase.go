@@ -490,7 +490,7 @@ func (m *Moon) DegreesInSignTropical() float64 {
 
 }
 
-func (m *Moon) DegreesInSignSiderial() float64 {
+func (m *Moon) DegreesInSignSidereal() float64 {
 	m.longitude = m.longitude - 24
 	return m.DegreesInSignTropical()
 }
