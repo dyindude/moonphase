@@ -363,49 +363,9 @@ func (m *Moon) Longitude() float64 {
 	return m.longitude
 }
 
-var signToSiderealDegrees = map[string]float64{
-	"aries":       33.18,
-	"taurus":      51.16,
-	"gemini":      93.44,
-	"cancer":      119.48,
-	"leo":         135.30,
-	"virgo":       173.34,
-	"libra":       224.17,
-	"scorpio":     242.57,
-	"sagittarius": 271.26,
-	"capricorn":   302.49,
-	"aquarius":    311.72,
-	"pisces":      348.58,
-}
-
 func (m *Moon) ZodiacSignSidereal() string {
-	if m.longitude < signToSiderealDegrees["aries"] {
-		return "aries"
-	} else if m.longitude < signToSiderealDegrees["taurus"] {
-		return "taurus"
-	} else if m.longitude < signToSiderealDegrees["gemini"] {
-		return "gemini"
-	} else if m.longitude < signToSiderealDegrees["cancer"] {
-		return "cancer"
-	} else if m.longitude < signToSiderealDegrees["leo"] {
-		return "leo"
-	} else if m.longitude < signToSiderealDegrees["virgo"] {
-		return "virgo"
-	} else if m.longitude < signToSiderealDegrees["libra"] {
-		return "libra"
-	} else if m.longitude < signToSiderealDegrees["scorpio"] {
-		return "scorpio"
-	} else if m.longitude < signToSiderealDegrees["sagittarius"] {
-		return "sagittarius"
-	} else if m.longitude < signToSiderealDegrees["capricorn"] {
-		return "capricorn"
-	} else if m.longitude < signToSiderealDegrees["aquarius"] {
-		return "aquarius"
-	} else if m.longitude < signToSiderealDegrees["pisces"] {
-		return "pisces"
-	} else {
-		return "aries"
-	}
+	m.longitude = m.longitude - 24.0
+	return m.ZodiacSignTropical()
 }
 
 func (m *Moon) ZodiacSignTropical() string {
