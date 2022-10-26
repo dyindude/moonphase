@@ -1,5 +1,7 @@
 // example that prints out a timestamp including some information
 // about the position of the Moon in the zodiac
+// example output:
+// 11:11PM Luna: New Moon 0.65%, Scorpio 11.957°
 package main
 
 import (
