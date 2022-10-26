@@ -432,45 +432,45 @@ func (m *Moon) ZodiacSign() string {
 
 func DegreesInSignTropical(m *moonphase.Moon) float64 {
 	switch m.longitude {
-	case longitude < 30.0:
+	case m.longitude < 30.0:
 		//"aries"
-		return longitude
-	case longitude < 60.0:
+		return m.longitude
+	case m.longitude < 60.0:
 		//"taurus"
-		return longitude - 30.0
-	case longitude < 90.0:
+		return m.longitude - 30.0
+	case m.longitude < 90.0:
 		//"gemini"
-		return longitude - 60.0
-	case longitude < 120.0:
+		return m.longitude - 60.0
+	case m.longitude < 120.0:
 		//"cancer"
-		return longitude - 90.0
-	case longitude < 150.0:
+		return m.longitude - 90.0
+	case m.longitude < 150.0:
 		//"leo"
-		return longitude - 120.0
-	case longitude < 180.0:
+		return m.longitude - 120.0
+	case m.longitude < 180.0:
 		//"virgo"
-		return longitude - 150.0
-	case longitude < 210.0:
+		return m.longitude - 150.0
+	case m.longitude < 210.0:
 		//"libra"
-		return longitude - 180.0
-	case longitude < 240.0:
+		return m.longitude - 180.0
+	case m.longitude < 240.0:
 		//"scorpio"
-		return longitude - 210.0
-	case longitude < 270.0:
+		return m.longitude - 210.0
+	case m.longitude < 270.0:
 		//"sagittarius"
-		return longitude - 240.0
-	case longitude < 300.0:
+		return m.longitude - 240.0
+	case m.longitude < 300.0:
 		//"capricorn"
-		return longitude - 270.0
-	case longitude < 330.0:
+		return m.longitude - 270.0
+	case m.longitude < 330.0:
 		//"aquarius"
-		return longitude - 300.0
-	case longitude < 360.0:
+		return m.longitude - 300.0
+	case m.longitude < 360.0:
 		//"pisces"
-		return longitude - 330.0
+		return m.longitude - 330.0
 	default:
 		//"aries"
-		return longitude - 348.58
+		return m.longitude - 348.58
 	}
 
 }
