@@ -1,4 +1,4 @@
-# MoonPhase
+# moonphase
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/janczer/MoonPhase/master/LICENSE)
 
 Package `moonphase` allows calculation of the phase of Moon and other related data. It's an implementation of [php-moon-phase](https://github.com/solarissmoke/php-moon-phase) in go.
