@@ -15,5 +15,10 @@ import (
 func main() {
 	t := time.Now()
 	m := moonphase.New(t)
-	fmt.Printf("%s Luna: %s %.2f%%, %s %.3f°\n", t.Format(time.Kitchen), m.PhaseName(), m.Illumination()*100, strings.Title(m.ZodiacSignTropical()), m.DegreesInSignTropical())
+	fmt.Printf("%s Luna: %s %.2f%%, %s %.3f°\n",
+		t.Format(time.Kitchen),
+		m.PhaseName(),
+		m.Illumination()*100,
+		strings.Title(m.ZodiacSignTropical()),
+		m.DegreesInSignTropical())
 }
