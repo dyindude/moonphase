@@ -35,6 +35,7 @@ type Moon struct {
 	quarters  [8]float64
 	timespace float64
 	longitude float64
+	sidereal  bool `default: true`
 }
 
 var synmonth float64 = 29.53058868 // Synodic month (new Moon to new Moon)
@@ -362,7 +363,7 @@ func (m *Moon) Longitude() float64 {
 	return m.longitude
 }
 
-func (m *Moon) ZodiacSign() string {
+func (m *Moon) ZodiacSignSidereal() string {
 	if m.longitude < 33.18 {
 		return "aries"
 	} else if m.longitude < 51.16 {
@@ -390,4 +391,41 @@ func (m *Moon) ZodiacSign() string {
 	} else {
 		return "aries"
 	}
+}
+
+func (m *Moon) ZodiacSignTropical() string {
+	if m.longitude < 30.0 {
+		return "aries"
+	} else if m.longitude < 60.0 {
+		return "taurus"
+	} else if m.longitude < 90.0 {
+		return "gemini"
+	} else if m.longitude < 120.0 {
+		return "cancer"
+	} else if m.longitude < 150.0 {
+		return "leo"
+	} else if m.longitude < 180.0 {
+		return "virgo"
+	} else if m.longitude < 210.0 {
+		return "libra"
+	} else if m.longitude < 240.0 {
+		return "scorpio"
+	} else if m.longitude < 270.0 {
+		return "sagittarius"
+	} else if m.longitude < 300.0 {
+		return "capricorn"
+	} else if m.longitude < 330.0 {
+		return "aquarius"
+	} else if m.longitude < 360.0 {
+		return "pisces"
+	} else {
+		return "aries"
+	}
+}
+
+func (m *Moon) ZodiacSign() string {
+	if m.sidereal {
+		return m.ZodiacSignSidereal()
+	}
+	return m.ZodiacSignTropical()
 }
