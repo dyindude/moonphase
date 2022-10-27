@@ -35,7 +35,7 @@ type Moon struct {
 	quarters  [8]float64
 	timespace float64
 	longitude float64
-	sidereal  bool `default: true`
+	sidereal  bool `default: false`
 }
 
 var synmonth float64 = 29.53058868 // Synodic month (new Moon to new Moon)
