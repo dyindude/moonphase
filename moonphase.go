@@ -363,39 +363,46 @@ func (m *Moon) Longitude() float64 {
 	return m.longitude
 }
 
+func zodiacSignAndDegrees(longitude float64) (string, float64) {
+	switch longitude := fixangle(longitude); {
+	case longitude < 30.0:
+		return "aries", longitude
+	case longitude < 60.0:
+		return "taurus", longitude - 30.0
+	case longitude < 90.0:
+		return "gemini", longitude - 60.0
+	case longitude < 120.0:
+		return "cancer", longitude - 90.0
+	case longitude < 150.0:
+		return "leo", longitude - 120.0
+	case longitude < 180.0:
+		return "virgo", longitude - 150.0
+	case longitude < 210.0:
+		return "libra", longitude - 180.0
+	case longitude < 240.0:
+		return "scorpio", longitude - 210.0
+	case longitude < 270.0:
+		return "sagittarius", longitude - 240.0
+	case longitude < 300.0:
+		return "capricorn", longitude - 270.0
+	case longitude < 330.0:
+		return "aquarius", longitude - 300.0
+	case longitude < 360.0:
+		return "pisces", longitude - 330.0
+	default:
+		return "aries", longitude
+	}
+
+}
+
 func (m *Moon) ZodiacSignSidereal() string {
-	m.longitude = m.longitude - 24.0
-	return m.ZodiacSignTropical()
+	sign, _ := zodiacSignAndDegrees(m.longitude - 24.0)
+	return sign
 }
 
 func (m *Moon) ZodiacSignTropical() string {
-	if m.longitude < 30.0 {
-		return "aries"
-	} else if m.longitude < 60.0 {
-		return "taurus"
-	} else if m.longitude < 90.0 {
-		return "gemini"
-	} else if m.longitude < 120.0 {
-		return "cancer"
-	} else if m.longitude < 150.0 {
-		return "leo"
-	} else if m.longitude < 180.0 {
-		return "virgo"
-	} else if m.longitude < 210.0 {
-		return "libra"
-	} else if m.longitude < 240.0 {
-		return "scorpio"
-	} else if m.longitude < 270.0 {
-		return "sagittarius"
-	} else if m.longitude < 300.0 {
-		return "capricorn"
-	} else if m.longitude < 330.0 {
-		return "aquarius"
-	} else if m.longitude < 360.0 {
-		return "pisces"
-	} else {
-		return "aries"
-	}
+	sign, _ := zodiacSignAndDegrees(m.longitude)
+	return sign
 }
 
 func (m *Moon) ZodiacSign() string {
@@ -406,51 +413,11 @@ func (m *Moon) ZodiacSign() string {
 }
 
 func (m *Moon) DegreesInSignTropical() float64 {
-	switch longitude := m.Longitude(); {
-	case longitude < 30.0:
-		//"aries"
-		return longitude
-	case longitude < 60.0:
-		//"taurus"
-		return longitude - 30.0
-	case longitude < 90.0:
-		//"gemini"
-		return longitude - 60.0
-	case longitude < 120.0:
-		//"cancer"
-		return longitude - 90.0
-	case longitude < 150.0:
-		//"leo"
-		return longitude - 120.0
-	case longitude < 180.0:
-		//"virgo"
-		return longitude - 150.0
-	case longitude < 210.0:
-		//"libra"
-		return longitude - 180.0
-	case longitude < 240.0:
-		//"scorpio"
-		return longitude - 210.0
-	case longitude < 270.0:
-		//"sagittarius"
-		return longitude - 240.0
-	case longitude < 300.0:
-		//"capricorn"
-		return longitude - 270.0
-	case longitude < 330.0:
-		//"aquarius"
-		return longitude - 300.0
-	case longitude < 360.0:
-		//"pisces"
-		return longitude - 330.0
-	default:
-		//"redundant for tropical"
-		return longitude
-	}
-
+	_, degrees := zodiacSignAndDegrees(m.Longitude())
+	return degrees
 }
 
 func (m *Moon) DegreesInSignSidereal() float64 {
-	m.longitude = m.longitude - 24.0
-	return m.DegreesInSignTropical()
+	_, degrees := zodiacSignAndDegrees(m.Longitude() - 24.0)
+	return degrees
 }
